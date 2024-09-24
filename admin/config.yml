@@ -1,0 +1,756 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  branch: master
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_0
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Twitter Image
+            name: twitter:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: before_afters
+    label: Before & Afters
+    folder: cms/before-afters
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_before-image
+        label: Before Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_after-image
+        label: After Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: before-afters
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[before-afters].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: services
+    label: Services
+    folder: cms/services
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_service-details
+        label: Service Details
+        widget: text
+        required: false
+      - hint: ''
+        name: f_service-icon
+        label: Service Icon
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_service-thumbnail
+        label: Service Thumbnail
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: services
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[services].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: social
+    label: Socials
+    folder: cms/social
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_icon
+        label: Icon
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_link
+        label: Link
+        widget: string
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: social
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[social].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: Home, key: 2268ff'
+            label: Text
+            name: 2268ff
+            widget: string
+          - hint: 'Original text: About, key: 3c2336d'
+            label: Text
+            name: 3c2336d
+            widget: string
+          - hint: 'Original text: Contact, key: -64104400'
+            label: Text
+            name: '-64104400'
+            widget: string
+          - hint: 'Original text: Your , key: 51a662d'
+            label: Text
+            name: 51a662d
+            widget: string
+          - hint: 'Original text: Free Time , key: -175963c1'
+            label: Text
+            name: '-175963c1'
+            widget: string
+          - hint: 'Original text: begins with our , key: 6e8e29b8'
+            label: Text
+            name: 6e8e29b8
+            widget: string
+          - hint: 'Original text: Cleaning Experience, key: -103f210f'
+            label: Text
+            name: '-103f210f'
+            widget: string
+          - hint: >-
+              Original text: Need expert cleaning services you can trust?
+              Discover the premier choice for residential and commercial
+              cleaning in the Monroe County area., key: 1c7ec938
+            label: Text
+            name: 1c7ec938
+            widget: text
+          - hint: 'Original text: Book Now, key: 7b3ec11f'
+            label: Text
+            name: 7b3ec11f
+            widget: string
+          - hint: 'Original text: BEFORE, key: 748d337f'
+            label: Text
+            name: 748d337f
+            widget: string
+          - hint: 'Original text:  Johnson Cleaning, key: 34f6a4b2'
+            label: Text
+            name: 34f6a4b2
+            widget: string
+          - hint: >-
+              Original text: Pick the Date & We Promise Not To Be Late., key:
+              -44df6776
+            label: Text
+            name: '-44df6776'
+            widget: string
+          - hint: >-
+              Original text: Schedule your next appointment in an instant. Pick
+              the ideal date and time you'd like us to show up and we'll deliver
+              you a cleaning experience second to none., key: 5ef414d9
+            label: Text
+            name: 5ef414d9
+            widget: text
+          - hint: 'Original text: AFTER, key: 3b50dbc'
+            label: Text
+            name: 3b50dbc
+            widget: string
+          - hint: 'Original text: Benefits, key: 685742dc'
+            label: Text
+            name: 685742dc
+            widget: string
+          - hint: 'Original text: Why choose us, key: 55aacacf'
+            label: Text
+            name: 55aacacf
+            widget: string
+          - hint: >-
+              Original text: Choose us to the solution to your home maintenance
+              needs. Johnson Carpet & Furniture Cleaning prides itself on first
+              rate experience that exemplifies an attention to detail and a
+              passion to deliver a quality result for each customer., key:
+              -7a254f20
+            label: Text
+            name: '-7a254f20'
+            widget: text
+          - hint: 'Original text: Trained & Skilled Staffing, key: -2ab82e5b'
+            label: Text
+            name: '-2ab82e5b'
+            widget: string
+          - hint: >-
+              Original text: Our team consists of trained and skilled
+              professionals who deliver top-quality cleaning every time., key:
+              b3dba83
+            label: Text
+            name: b3dba83
+            widget: text
+          - hint: 'Original text: Timely Service, key: -11a81251'
+            label: Text
+            name: '-11a81251'
+            widget: string
+          - hint: >-
+              Original text: Your time is valuable & we look to provide an
+              efficient service experience for you., key: 25183838
+            label: Text
+            name: '25183838'
+            widget: string
+          - hint: 'Original text: Commitment to Excellence, key: -7d4945e6'
+            label: Text
+            name: '-7d4945e6'
+            widget: string
+          - hint: >-
+              Original text: Our goal is to make sure your home or facility is
+              exceeds your expectations once our job is completed., key:
+              -2074c13f
+            label: Text
+            name: '-2074c13f'
+            widget: text
+          - hint: 'Original text: Services We Provide, key: 506f0831'
+            label: Text
+            name: 506f0831
+            widget: string
+          - hint: 'Original text: No items found., key: 3d503d2b'
+            label: Text
+            name: 3d503d2b
+            widget: string
+          - hint: 'Original text: Cleaning is more than just a task. , key: -67ae8fd9'
+            label: Text
+            name: '-67ae8fd9'
+            widget: string
+          - hint: >-
+              Original text: It's a way to bring extra care or comfort to your
+              home or business., key: 7ef60e7e
+            label: Text
+            name: 7ef60e7e
+            widget: string
+          - hint: 'Original text: Get in touch with us, key: 5d4fbc46'
+            label: Text
+            name: 5d4fbc46
+            widget: string
+          - hint: >-
+              Original text: We deliver high-quality cleaning services across
+              Monroe County., key: 36c9ca87
+            label: Text
+            name: 36c9ca87
+            widget: string
+          - hint: 'Original text: First Name*, key: -33504eb1'
+            label: Text
+            name: '-33504eb1'
+            widget: string
+          - hint: 'Original text: Last Name*, key: -6eb65f0b'
+            label: Text
+            name: '-6eb65f0b'
+            widget: string
+          - hint: 'Original text: Email*, key: 7bec142e'
+            label: Text
+            name: 7bec142e
+            widget: string
+          - hint: 'Original text: Phone*, key: -718ea364'
+            label: Text
+            name: '-718ea364'
+            widget: string
+          - hint: 'Original text: How Can I Help*, key: -6c5eea0e'
+            label: Text
+            name: '-6c5eea0e'
+            widget: string
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: 'Original text: LOGO, key: 23bdab'
+            label: Text
+            name: 23bdab
+            widget: string
+          - hint: 'Original text: FAQS, key: 20d01d'
+            label: Text
+            name: 20d01d
+            widget: string
+          - hint: 'Original text: Terms Of Service, key: -910fa3b'
+            label: Text
+            name: '-910fa3b'
+            widget: string
+          - hint: 'Original text: Privacy Policy, key: -3fbde6f6'
+            label: Text
+            name: '-3fbde6f6'
+            widget: string
+          - hint: 'Original text: CONTACT, key: 6382b000'
+            label: Text
+            name: 6382b000
+            widget: string
+          - hint: 'Original text: 585-709-2912, key: 6d6bf950'
+            label: Text
+            name: 6d6bf950
+            widget: string
+          - hint: 'Original text: DarquinnJohnson730@gmail.com, key: 1616a98e'
+            label: Text
+            name: 1616a98e
+            widget: string
+          - hint: 'Original text: LOCATION, key: -600a704b'
+            label: Text
+            name: '-600a704b'
+            widget: string
+          - hint: 'Original text: Rochester, New York, key: 1ce2c534'
+            label: Text
+            name: 1ce2c534
+            widget: string
+          - hint: 'Original text: SOCIAL, key: -6de4f493'
+            label: Text
+            name: '-6de4f493'
+            widget: string
+          - hint: 'Original text: © 2024 Johnson Cleaning Service., key: -271dc0c2'
+            label: Text
+            name: '-271dc0c2'
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: /faq/, key: 2c62888'
+            label: Link
+            name: 2c62888
+            widget: string
+          - hint: 'Original link: /terms-of-service/, key: -68cf0c45'
+            label: Link
+            name: '-68cf0c45'
+            widget: string
+          - hint: 'Original link: /privacy-policy/, key: -2f934417'
+            label: Link
+            name: '-2f934417'
+            widget: string
+          - hint: 'Original link: tel:5857092912, key: -5ca7a64b'
+            label: Link
+            name: '-5ca7a64b'
+            widget: string
+          - hint: 'Original link: mailto:darquinnjohnson730@gmail.com, key: 4a0f5156'
+            label: Link
+            name: 4a0f5156
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: i1220c641
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 7e5632a7
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i53051625
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-15ee7a68'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-69686ce'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-56a6855c'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-74b3f701'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 317f733b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
